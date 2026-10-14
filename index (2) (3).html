@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4e9e1" />
+  <title>Laporan Data Pakaian</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="toolbar">
+      <div>
+        <p class="eyebrow">PENCATATAN PRODUK</p>
+        <h1>Laporan Data Pakaian</h1>
+        <p class="subheading">Susun data pakaian dan simpan sebagai gambar PNG.</p>
+      </div>
+      <div class="toolbar-actions">
+        <button id="newReportBtn" class="button secondary">Laporan Baru</button>
+        <button id="downloadBtn" class="button primary">↓ Download PNG</button>
+      </div>
+    </section>
+
+    <section class="panel form-panel">
+      <h2>Tambah data pakaian</h2>
+      <form id="itemForm" class="entry-grid">
+        <label>Nama barang<input id="nameInput" required maxlength="80" placeholder="Contoh: Kemeja Toyobo" /></label>
+        <label>Warna<input id="colorInput" required maxlength="50" placeholder="Contoh: Mocca" /></label>
+        <label>Ukuran
+          <input id="sizeInput" required maxlength="20" placeholder="Contoh: M, L, XL" />
+        </label>
+        <label>Jumlah<input id="quantityInput" type="number" min="0" step="1" required placeholder="Contoh: 12" /></label>
+        <button class="button primary add-button" type="submit">＋ Tambah ke tabel</button>
+      </form>
+      <p class="hint">Data tersimpan otomatis di browser perangkat ini. Jumlah dicatat per baris; tidak ada total jumlah di bagian bawah.</p>
+    </section>
+
+    <section id="reportCanvas" class="report-card">
+      <header class="report-header">
+        <div class="brand-mark" aria-hidden="true">♧</div>
+        <div class="report-title">
+          <p class="eyebrow">REKAPITULASI STOK / PRODUKSI</p>
+          <h2 id="reportTitle">LAPORAN DATA PAKAIAN</h2>
+          <p class="report-caption">Daftar jenis pakaian, warna, ukuran, dan jumlah</p>
+        </div>
+        <div class="report-date">
+          <span>▦ <b>Tanggal</b></span><span id="dateLabel"></span>
+        </div>
+      </header>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>Nama Barang</th><th>Warna</th><th>Ukuran</th><th>Jumlah</th><th class="action-column">Aksi</th></tr></thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <div id="emptyState" class="empty-state">Belum ada data. Tambahkan pakaian melalui formulir di atas.</div>
+      </div>
+      <footer class="report-footer">
+        <span>Jumlah baris data: <strong id="rowCount">0</strong></span>
+        <span>— Laporan Data Pakaian —</span>
+      </footer>
+    </section>
+
+    <section class="below-grid">
+      <section class="panel">
+        <div class="panel-heading"><div><h2>Riwayat laporan</h2><p class="subheading">Simpan snapshot untuk dibuka kembali nanti.</p></div></div>
+        <div class="history-actions">
+          <input id="historyName" aria-label="Nama laporan" placeholder="Nama laporan, mis. Produksi Oktober" />
+          <button id="saveHistoryBtn" class="button secondary">Simpan ke riwayat</button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+      <section class="panel backup-panel">
+        <h2>Cadangan data</h2>
+        <p class="subheading">Ekspor cadangan untuk memindahkan data ke perangkat lain.</p>
+        <div class="backup-actions">
+          <button id="exportBackupBtn" class="button secondary">Ekspor JSON</button>
+          <label class="button secondary import-button">Impor JSON<input id="importBackupInput" type="file" accept="application/json,.json" hidden /></label>
+          <button id="clearBtn" class="button danger">Hapus semua data</button>
+        </div>
+      </section>
+    </section>
+    <p class="app-footnote">Tips: gunakan tombol <b>Download PNG</b> untuk menyimpan tabel sebagai gambar. Saat gambar dibuat, kolom Aksi disembunyikan otomatis.</p>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
